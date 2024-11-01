@@ -1,0 +1,14 @@
+{
+  "name": "orders-load-generation",
+  "version": "1.0.0",
+  "description": "Module to generate orders using Artillery",
+  "main": "order-payload-generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saurabh Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^10.0.0"
+  }
+}

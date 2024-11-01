@@ -1,0 +1,39 @@
+config:
+  # This is a test server run by team Artillery
+  # It's designed to be highly scalable
+  target: "{{ $env.API_URL }}"
+  phases:
+    - duration: 600
+      # arrivalCount: 10
+      #2 requests per second for 10 minutes
+      arrivalRate: 2
+      name: Sustained peak load
+  processor: "./order-payload-generator.js"
+  plugins:
+    publish-metrics:
+      - type: cloudwatch
+        region: us-east-1
+        namespace: artillery-lambda-fault-actions-load
+        dimensions:
+          - name: Service
+            value: orders-svc
+
+scenarios:
+  - flow:
+      - function: "generatePayloadData"
+      - post:
+          url: "/Orders"
+          afterResponse: "printStatus"
+          json:
+            Id: "{{ Id }}"
+            deviceId: "{{ deviceId }}"
+            protectionPlanAmount: "{{ protectionPlanAmount }}"
+            orderAmount: "{{ orderAmount }}"
+            protectionPlan: "{{ protectionPlan }}"
+            deviceType: "{{ deviceType }}"
+            customerOrderId: "{{ customerOrderId }}"
+            customerId: "{{ customerId }}"
+      - think: 1
+      - get:
+          url: "/Orders/{{ Id }}"
+          afterResponse: "printStatus"
