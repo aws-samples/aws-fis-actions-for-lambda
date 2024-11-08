@@ -11,6 +11,7 @@ response to bad data.
 - [CDK Toolkit](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) & bootstrapped AWS environment
 - [docker](https://docs.docker.com/engine/install/)
 - [mvn](https://maven.apache.org/run.html)
+- [Turn on CloudWatch logs for API Gateway REST and WebSocket APIs](https://repost.aws/knowledge-center/api-gateway-cloudwatch-logs)
 
 > **[!IMPORTANT]**
 > You need to deploy the stack to an AWS Region where [AWS FIS is supported](https://docs.aws.amazon.com/general/latest/gr/fis.html).
