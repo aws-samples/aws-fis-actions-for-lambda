@@ -1,5 +1,6 @@
 *.js
 !jest.config.js
+!load-generation/order-payload-generator.js
 *.d.ts
 node_modules
 
