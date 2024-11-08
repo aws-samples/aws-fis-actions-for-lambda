@@ -61,6 +61,7 @@ To deploy resources, please execute the following command in the CLI environment
 
 ```
 cd cdk-lambda-chaos
+cdk bootstrap
 npm ci
 cdk deploy --all --parameters FisLambdaAPIs:fisLambdaLayerARN='arn:aws:lambda:us-east-1:211125607513:layer:aws-fis-extension-x86_64:9'
 cd ..
