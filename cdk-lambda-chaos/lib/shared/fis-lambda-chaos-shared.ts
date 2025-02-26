@@ -5,7 +5,7 @@ import { Runtime } from 'aws-cdk-lib/aws-lambda';
 
 // create prefixes
 export const API_PREFIXES = {
-    TypeScript: 'ApyTypeScript',
+    TypeScript: 'ApiTypeScript',
     Python: 'ApiPython',
     Java: 'ApiJava'
 }

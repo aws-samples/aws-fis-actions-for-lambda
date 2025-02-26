@@ -3,7 +3,7 @@ config:
   # It's designed to be highly scalable
   target: "{{ $env.API_URL }}"
   phases:
-    - duration: 600
+    - duration: 900
       # arrivalCount: 10
       #2 requests per second for 10 minutes
       arrivalRate: 2
