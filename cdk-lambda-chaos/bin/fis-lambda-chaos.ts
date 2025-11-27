@@ -12,8 +12,8 @@ const app = new cdk.App();
 // Aspects.of(app).add(new AwsSolutionsChecks({verbose: true}))
 
 let apiResourceName = 'Orders';
-// TODO get lambda arn from SSM
-let fisLambdaLayerARN = 'arn:aws:lambda:us-east-1:211125607513:layer:aws-fis-extension-x86_64:9';
+// Use SSM parameter path for FIS Lambda extension layer
+let fisLambdaLayerParameterName = '/aws/service/fis/lambda-extension/AWS-FIS-extension-x86_64/1.x.x';
 let fisLambdaTagName = 'FISExperimentReady'
 let fisLambdaTagValue = 'Yes'
 let fisResourceTag: TargetTag = {
@@ -45,7 +45,7 @@ const lambdaStack = new ServerlessApiStack(app, `${stackName}APIs`, {
         region: process.env.AWS_REGION ?? process.env.CDK_DEFAULT_REGION,
     },
     StackName: stackName,
-    FisLambdaLayerARN: fisLambdaLayerARN,
+    FisLambdaLayerParameterName: fisLambdaLayerParameterName,
     ResourceTag: fisResourceTag,
     ApiResourceName: apiResourceName
 });

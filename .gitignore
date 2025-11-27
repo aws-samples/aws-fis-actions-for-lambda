@@ -9,6 +9,9 @@ node_modules
 cdk.out
 tmp/*
 
+# Caches the SSM Parameter value for the FIS layer, typically this file should be included in git if you work collaboratively on a project
+cdk.context.json
+
 **/node_modules
 
 # Java bundles

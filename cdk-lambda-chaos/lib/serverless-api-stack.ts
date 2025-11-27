@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { CfnParameter, Fn, RemovalPolicy } from 'aws-cdk-lib';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { JAVA_LAMBDA_FUNCTION_HANDLERS, JAVA_LAMBDA_FUNCTION_NAMES, LAMBDA_FUNCTION_HANDLER_ASSETS_FOLDERS, LambdaStackProps, PYTHON_LAMBDA_FUNCTION_HANDLERS, PYTHON_LAMBDA_FUNCTION_NAMES, TargetTag, TYPESCRIPT_LAMBDA_FUNCTION_HANDLERS, TYPESCRIPT_LAMBDA_FUNCTION_NAMES } from './shared/fis-lambda-chaos-shared';
 import { AttributeType, Table, TableEncryption } from 'aws-cdk-lib/aws-dynamodb';
@@ -26,11 +27,8 @@ export class ServerlessApiStack extends cdk.Stack {
             }
         }
 
-        // create a CfnParameter for fisLambdaLayerARN
-        const fisLambdaLayerArnParam = new CfnParameter(this, "fisLambdaLayerARN", {
-        type: "String",
-        description: "ARN of FIS Lambda extension.",
-        default: props.FisLambdaLayerARN});
+        // Lookup FIS Lambda Layer ARN from SSM Parameter Store
+        const fisLambdaLayerArn = ssm.StringParameter.valueFromLookup(this, props.FisLambdaLayerParameterName);
 
         // Importing resources
         const fisBucketARN = Fn.importValue("fisBucketARN");
@@ -94,7 +92,7 @@ export class ServerlessApiStack extends cdk.Stack {
         
         const lambdaApiTypeScript = new LambdaApiTypeScript(this, "ApiTypeScript", {
             ResourceTag: fisResourceTag,
-            FisLambdaLayerARN: fisLambdaLayerArnParam.valueAsString,
+            FisLambdaLayerARN: fisLambdaLayerArn,
             StackName: props.StackName,
             LambdaS3ListStatement: lambdaS3ListStatement,
             LambdaS3GetStatement: lambdaS3GetStatement,
@@ -135,7 +133,7 @@ export class ServerlessApiStack extends cdk.Stack {
 
         const lambdaApiPython = new LambdaApiPython(this, "ApiPython", {
             ResourceTag: fisResourceTag,
-            FisLambdaLayerARN: fisLambdaLayerArnParam.valueAsString,
+            FisLambdaLayerARN: fisLambdaLayerArn,
             StackName: props.StackName,
             LambdaS3ListStatement: lambdaS3ListStatement,
             LambdaS3GetStatement: lambdaS3GetStatement,
@@ -175,7 +173,7 @@ export class ServerlessApiStack extends cdk.Stack {
 
         const lambdaApiJava = new LambdaApiJava(this, "ApiJava", {
             ResourceTag: fisResourceTag,
-            FisLambdaLayerARN: fisLambdaLayerArnParam.valueAsString,
+            FisLambdaLayerARN: fisLambdaLayerArn,
             StackName: props.StackName,
             LambdaS3ListStatement: lambdaS3ListStatement,
             LambdaS3GetStatement: lambdaS3GetStatement,

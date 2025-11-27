@@ -64,7 +64,7 @@ To deploy resources, please execute the following command in the CLI environment
 cd cdk-lambda-chaos
 cdk bootstrap
 npm ci
-cdk deploy --all --parameters FisLambdaAPIs:fisLambdaLayerARN='arn:aws:lambda:us-east-1:211125607513:layer:aws-fis-extension-x86_64:9'
+cdk deploy --all
 cd ..
 ```
 
@@ -94,7 +94,7 @@ Use the API endpoint you've captured before and remove the trailing "/" from the
 export API_URL='https://<api_id>.execute-api.<region>.amazonaws.com/prod'
 ```
 
-This would be used by the Artillery load generation script.
+This will be used by the Artillery load generation script.
 
 **NOTE:** *You just have to set the base path without leading '/' as '/' is added within the load generation configuration.*
 

@@ -91,7 +91,7 @@ export interface TargetTag {
 
 export interface LambdaStackProps extends StackProps {
     StackName: string,
-    FisLambdaLayerARN: string,
+    FisLambdaLayerParameterName: string,
     ResourceTag: TargetTag,
     ApiResourceName: string,
     CanaryName?: string,
