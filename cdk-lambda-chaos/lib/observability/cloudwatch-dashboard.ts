@@ -1,8 +1,7 @@
+import { Duration } from "aws-cdk-lib";
+import { Dashboard, GraphWidget, Metric } from "aws-cdk-lib/aws-cloudwatch";
 import { Construct } from "constructs";
 import { ObservabilityProps } from "../shared/fis-lambda-chaos-shared";
-import { Dashboard, GraphWidget, Metric } from "aws-cdk-lib/aws-cloudwatch";
-import { Duration } from "aws-cdk-lib";
-import * as logs from "aws-cdk-lib/aws-logs";
 
 export class CloudwatchDashboard extends Construct {
 

@@ -1,6 +1,6 @@
 import { StackProps } from 'aws-cdk-lib';
-import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Table } from 'aws-cdk-lib/aws-dynamodb';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
 
 // create prefixes
