@@ -13,13 +13,13 @@ export class LambdaApiJava extends ServerlessCrudApi {
 
     createLambdaFunction(commonProps: CommonProps, functionName: string, handler: string, lambdaAssetsFolder: string) {
         console.log(`Creating Lambda Function: ${functionName} --- handler: ${handler}`);
-        const lambdaFunction =  new Function(this, functionName, {
+        const lambdaFunction = new Function(this, functionName, {
             ...commonProps,
             code: Code.fromAsset(path.join(__dirname, 'lambda-functions/CrudApi'), {
                 bundling: this.createBundlingOptions(commonProps.runtime)
             }),
             handler: handler,
-            logGroup:this.createLogGroupForLambdaFunction(functionName),
+            logGroup: this.createLogGroupForLambdaFunction(functionName),
         });
         return lambdaFunction;
     }
@@ -39,9 +39,9 @@ export class LambdaApiJava extends ServerlessCrudApi {
                     const projectPath = path.join(__dirname, 'lambda-functions/CrudApi');
 
                     const commands = [
-                        `cd ${projectPath}`,
+                        `cd "${projectPath}"`,
                         'mvn clean install',
-                        `cp target/CrudApi-1.0.jar ${outputDir}`
+                        `cp target/CrudApi-1.0.jar "${outputDir}"`
                     ];
 
                     execSync(commands.join(' && '));
