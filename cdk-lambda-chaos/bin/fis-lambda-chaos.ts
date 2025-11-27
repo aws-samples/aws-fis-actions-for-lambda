@@ -1,11 +1,9 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { Aspects, CfnParameter } from 'aws-cdk-lib';
+import 'source-map-support/register';
 import { FisExperimentsStack } from '../lib/fis-experiments-stack';
 import { ServerlessApiStack } from '../lib/serverless-api-stack';
 import { TargetTag } from '../lib/shared/fis-lambda-chaos-shared';
-import { AwsSolutionsChecks } from 'cdk-nag';
 
 const stackName = "FisLambda";
 const app = new cdk.App();
